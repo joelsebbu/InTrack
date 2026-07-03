@@ -16,7 +16,8 @@ confirm_changeset = true
 resolve_s3 = true
 parameter_overrides = [
   "GitLabProjectId=REPLACE_WITH_PROJECT_ID",
-  "GitLabTokenSecretArn=arn:aws:secretsmanager:REGION:ACCOUNT:secret:gitlab-token-XXXXXX"
+  "GitLabTokenSecretArn=arn:aws:secretsmanager:REGION:ACCOUNT:secret:gitlab-token-XXXXXX",
+  "AuthSecretArn=arn:aws:secretsmanager:REGION:ACCOUNT:secret:intrack-auth-XXXXXX"
 ]
 
 [default.package.parameters]
