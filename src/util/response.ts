@@ -27,3 +27,7 @@ export function serverError(message: string, retryable = false): APIGatewayProxy
 export function conflict(message: string): APIGatewayProxyResultV2 {
   return jsonResponse(409, { error: message, retryable: true });
 }
+
+export function unauthorized(message: string): APIGatewayProxyResultV2 {
+  return jsonResponse(401, { error: message });
+}

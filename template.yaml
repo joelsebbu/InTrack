@@ -17,6 +17,9 @@ Parameters:
   GitLabTokenSecretArn:
     Type: String
     Description: ARN of Secrets Manager secret containing the GitLab token (plain string)
+  AuthSecretArn:
+    Type: String
+    Description: ARN of Secrets Manager secret with username, password, and jwtSecret (JSON)
   CorsAllowOrigin:
     Type: String
     Default: '*'
@@ -35,6 +38,7 @@ Globals:
         GITLAB_PROJECT_ID: !Ref GitLabProjectId
         GITLAB_BRANCH: !Ref GitLabBranch
         GITLAB_TOKEN_SECRET_ARN: !Ref GitLabTokenSecretArn
+        AUTH_SECRET_ARN: !Ref AuthSecretArn
 
 Resources:
   ExpenseApi:
@@ -65,8 +69,16 @@ Resources:
             - Effect: Allow
               Action:
                 - secretsmanager:GetSecretValue
-              Resource: !Ref GitLabTokenSecretArn
+              Resource:
+                - !Ref GitLabTokenSecretArn
+                - !Ref AuthSecretArn
       Events:
+        OAuthToken:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ExpenseApi
+            Path: /oauth/token
+            Method: POST
         GetMetadata:
           Type: HttpApi
           Properties:
