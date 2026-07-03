@@ -1,0 +1,21 @@
+{
+  "name": "intrack-expense-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Expense tracker API — Lambda + GitLab storage",
+  "scripts": {
+    "build": "sam build",
+    "deploy": "sam deploy",
+    "local": "sam local start-api",
+    "validate": "sam validate --lint"
+  },
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.600.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^20.14.0",
+    "esbuild": "^0.21.5",
+    "typescript": "^5.5.0"
+  }
+}
