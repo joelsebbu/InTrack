@@ -99,3 +99,25 @@ curl -X POST "$API_URL/reports/recent" \
 
 `days` must be between 1 and 90. `endDate` is optional and defaults to today's
 IST calendar date.
+
+## PWA frontend
+
+The mobile-first PWA lives in [`pwa/`](pwa/).
+
+```bash
+cd pwa
+cp .env.example .env   # set VITE_API_URL to your API Gateway URL
+npm install
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run pwa:build
+```
+
+Deploy the contents of `pwa/dist/` to any static host (S3 + CloudFront, Netlify, etc.).
+Set the SAM parameter `CorsAllowOrigin` to your PWA URL when deploying the API.
+
+**Features:** login, 7-day expense list + summary (INR), add expense sheet with new categories, month/year reports, installable PWA with offline shell.

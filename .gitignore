@@ -1,4 +1,6 @@
 node_modules/
 .aws-sam/
 dist/
+pwa/dist/
+pwa/node_modules/
 *.js.map

@@ -1,0 +1,136 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(167, 139, 250, 0.12), transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(56, 189, 248, 0.08), transparent 35%),
+    linear-gradient(160deg, var(--color-bg-start), var(--color-bg-end));
+  background-attachment: fixed;
+}
+
+body {
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.sheet-open {
+  overflow: hidden;
+}
+
+#app,
+.app-shell {
+  min-height: 100dvh;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.boot-loading,
+.loading-state {
+  color: var(--color-text-muted);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.error-state {
+  color: var(--color-danger);
+  padding: var(--space-md);
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-shell__main {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-md);
+  padding-bottom: calc(var(--nav-height) + var(--fab-height) + var(--space-xl) + var(--safe-bottom));
+}
+
+.app-shell__nav {
+  position: fixed;
+  left: var(--space-md);
+  right: var(--space-md);
+  bottom: calc(var(--safe-bottom) + var(--space-sm));
+  z-index: 20;
+}
+
+.app-shell__fab-host {
+  position: fixed;
+  left: var(--space-md);
+  right: var(--space-md);
+  bottom: calc(var(--nav-height) + var(--safe-bottom) + var(--space-md));
+  z-index: 21;
+}
+
+.page-header h1 {
+  margin: 0 0 var(--space-lg);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.login-page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-lg);
+}
+
+.login-card {
+  width: min(100%, 400px);
+  padding: var(--space-xl);
+}
+
+.login-card__brand {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.login-card__mark {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+
+.login-card__brand h1 {
+  margin: 0 0 var(--space-xs);
+}
+
+.login-card__brand p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.home-page__content,
+.reports-page,
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
