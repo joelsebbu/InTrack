@@ -73,3 +73,9 @@ All other endpoints require `Authorization: Bearer <access_token>`.
 | POST | `/reports/generate` | Yes | Read or compute report |
 | POST | `/reports/save` | Yes | Commit report file |
 | POST | `/reports/refresh` | Yes | Force recompute report |
+
+## Calendar dates
+
+Expense day files and report periods use IST (`Asia/Kolkata`) calendar dates.
+For example, an expense timestamped `2026-07-04T02:00:00+05:30` is stored in
+`expenses/2026/07/04.json`, and it invalidates the July 2026 monthly report.
