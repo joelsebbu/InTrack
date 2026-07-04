@@ -1,10 +1,11 @@
 import type { ReportType } from '../types';
+import { calendarDatePartsInAppTimeZone } from '../util/dates';
 
 export function pathForExpense(timestamp: string | Date): string {
-  const d = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
-  const year = d.getUTCFullYear();
-  const month = String(d.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(d.getUTCDate()).padStart(2, '0');
+  const { year, month: monthNumber, day: dayNumber } =
+    calendarDatePartsInAppTimeZone(timestamp);
+  const month = String(monthNumber).padStart(2, '0');
+  const day = String(dayNumber).padStart(2, '0');
   return `expenses/${year}/${month}/${day}.json`;
 }
 
@@ -41,9 +42,7 @@ export function expensePrefixForReport(type: ReportType, year: number, month?: n
 }
 
 export function reportPathsToInvalidate(timestamp: string | Date): string[] {
-  const d = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
-  const year = d.getUTCFullYear();
-  const month = d.getUTCMonth() + 1;
+  const { year, month } = calendarDatePartsInAppTimeZone(timestamp);
   return [
     pathForReport('month', year, month),
     pathForReport('year', year),
