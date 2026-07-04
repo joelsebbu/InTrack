@@ -1,12 +1,25 @@
 import type { ReportType } from '../types';
-import { calendarDatePartsInAppTimeZone } from '../util/dates';
+import {
+  calendarDatePartsInAppTimeZone,
+  formatCalendarDateParts,
+  parseCalendarDateString,
+} from '../util/dates';
 
 export function pathForExpense(timestamp: string | Date): string {
-  const { year, month: monthNumber, day: dayNumber } =
-    calendarDatePartsInAppTimeZone(timestamp);
-  const month = String(monthNumber).padStart(2, '0');
-  const day = String(dayNumber).padStart(2, '0');
-  return `expenses/${year}/${month}/${day}.json`;
+  return pathForExpenseDate(
+    formatCalendarDateParts(calendarDatePartsInAppTimeZone(timestamp)),
+  );
+}
+
+export function pathForExpenseDate(dateString: string): string {
+  const parts = parseCalendarDateString(dateString);
+  if (!parts) {
+    throw new Error('dateString must be YYYY-MM-DD');
+  }
+
+  const month = String(parts.month).padStart(2, '0');
+  const day = String(parts.day).padStart(2, '0');
+  return `expenses/${parts.year}/${month}/${day}.json`;
 }
 
 export function pathForReport(type: ReportType, year: number, month?: number): string {
