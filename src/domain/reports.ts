@@ -86,6 +86,13 @@ export function aggregateExpenses(
   month?: number,
 ): Report {
   const period = reportPeriod(type, year, month);
+  return aggregateExpenseEntries(entries, period);
+}
+
+export function aggregateExpenseEntries(
+  entries: ExpenseEntry[],
+  period: string,
+): Report {
   const byCategory: Report['byCategory'] = {};
   const bySubcategory: Report['bySubcategory'] = {};
   let totalAmount = 0;

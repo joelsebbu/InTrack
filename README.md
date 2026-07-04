@@ -73,9 +73,29 @@ All other endpoints require `Authorization: Bearer <access_token>`.
 | POST | `/reports/generate` | Yes | Read or compute report |
 | POST | `/reports/save` | Yes | Commit report file |
 | POST | `/reports/refresh` | Yes | Force recompute report |
+| POST | `/reports/recent` | Yes | Read last N days raw entries and aggregated report |
 
 ## Calendar dates
 
 Expense day files and report periods use IST (`Asia/Kolkata`) calendar dates.
 For example, an expense timestamped `2026-07-04T02:00:00+05:30` is stored in
 `expenses/2026/07/04.json`, and it invalidates the July 2026 monthly report.
+
+## Recent reports
+
+`POST /reports/recent` returns raw entries for the last N IST calendar days plus
+an aggregated report for the same range. It is read-only: it does not save,
+cache, or commit a report file.
+
+```bash
+curl -X POST "$API_URL/reports/recent" \
+  -H "Authorization: Bearer <access_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "days": 7,
+    "endDate": "2026-07-04"
+  }'
+```
+
+`days` must be between 1 and 90. `endDate` is optional and defaults to today's
+IST calendar date.

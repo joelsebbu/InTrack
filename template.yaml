@@ -109,6 +109,12 @@ Resources:
             ApiId: !Ref ExpenseApi
             Path: /reports/refresh
             Method: POST
+        RecentReport:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ExpenseApi
+            Path: /reports/recent
+            Method: POST
     Metadata:
       BuildMethod: esbuild
       BuildProperties:

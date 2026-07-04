@@ -7,6 +7,7 @@ import { GitLabClient } from './gitlab/client';
 import { handleAdd } from './routes/add';
 import { handleGetMetadata } from './routes/metadata';
 import { handleOAuthToken } from './routes/oauth';
+import { handleRecentReport } from './routes/recent';
 import {
   handleGenerateReport,
   handleRefreshReport,
@@ -30,6 +31,7 @@ const PROTECTED_ROUTES = new Set([
   'POST /reports/generate',
   'POST /reports/save',
   'POST /reports/refresh',
+  'POST /reports/recent',
 ]);
 
 export async function handler(
@@ -80,6 +82,10 @@ export async function handler(
 
     if (method === 'POST' && path === '/reports/refresh') {
       return ok(await handleRefreshReport(client, body));
+    }
+
+    if (method === 'POST' && path === '/reports/recent') {
+      return ok(await handleRecentReport(client, body));
     }
 
     return badRequest(`Unknown route: ${method} ${path}`);
